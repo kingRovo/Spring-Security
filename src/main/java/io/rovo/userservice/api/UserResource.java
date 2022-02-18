@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api")
@@ -54,6 +55,12 @@ public class UserResource {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/home")
+        public ResponseEntity<String> homePage(){
+
+            return  new ResponseEntity<>("Welcome to Home page",OK);
+        }
+
 
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
