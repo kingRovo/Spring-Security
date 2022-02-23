@@ -28,29 +28,29 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserResource {
     private final UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public ResponseEntity<List<User>>getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @PostMapping("/user/save")
+    @PostMapping("/")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
-    @PostMapping("/role/save")
+    @PostMapping("/role/")
     public ResponseEntity<Role>saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
-    @PostMapping("/role/addtouser")
+    @PostMapping("/role/users")
     public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
@@ -95,6 +95,7 @@ public class UserResource {
             }
         } else {
             throw new RuntimeException("Refresh token is missing");
+
         }
     }
 }

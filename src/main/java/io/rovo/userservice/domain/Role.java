@@ -1,5 +1,6 @@
 package io.rovo.userservice.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,9 @@ import static javax.persistence.GenerationType.AUTO;
 public class Role {
     @Id
     @GeneratedValue(strategy = AUTO)
+    @NotNull
     private Long id;
+
+    @NotNull
     private String name;
 }
